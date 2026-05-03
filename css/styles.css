@@ -3,6 +3,8 @@ body {
     font-family: Arial, sans-serif;
     background-color: #0d0d0d;
     color: #f5f5f5;
+    font-size: 18px;
+    font-family: 'Trebuchet MS', sans-serif;
 }
 
 /* Start Header */
@@ -16,9 +18,10 @@ body {
 }
 
 .logo {
-    font-size: 22px;
+    font-size: 30px;
     font-weight: bold;
     color: #ffd700;
+    padding: 20px;
 }
 
 /* End Header */
@@ -29,6 +32,7 @@ body {
     text-decoration: none;
     margin-left: 20px;
     font-weight: bold;
+    padding: 15px;
 }
 
 .navbar a:hover {
@@ -39,7 +43,7 @@ body {
 
 /* start MAIN */
 .container {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: auto;
     padding: 40px 20px;
     text-align: center;
@@ -48,17 +52,18 @@ body {
 h1 {
     color: #b30000;
     margin-bottom: 10px;
+    font-size: 45px;
 }
 
 p {
     color: #ccc;
     margin-bottom: 40px;
+    font-size: 23px;
 }
 
 /* Start Table styling */
 .table-wrapper {
     margin-top: 30px;
-    overflow-x: auto;
 }
 
 .movie-table {
@@ -75,7 +80,7 @@ p {
     color: #ffd700;
     padding: 12px;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 20px;
     border-bottom: 2px solid #b30000;
 }
 
@@ -88,11 +93,16 @@ p {
 .movie-table tr:hover {
     background: #2a2a2a;
 }
-
 /* End Table styling */
 
-/* start FOOTER /  
 
+/* start FOOTER */  
 .site-footer {  
-
-margin-top: 50px; padding: 20px; text-align: center; background: #111; border-top: 2px solid #b30000; color: #777; } / end FOOTER */
+    margin-top: 50px; 
+    padding: 20px; 
+    text-align: center; 
+    background: #111; 
+    border-top: 2px solid #b30000; 
+    color: #777; 
+}
+/* end FOOTER */
