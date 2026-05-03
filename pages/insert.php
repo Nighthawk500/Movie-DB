@@ -1,361 +1,88 @@
-<?php include("Ssi-header.php"); ?>
-
-<?php include("Ssi-conn.php"); ?>
-
-
-
-<style>
-    html,
-    body {
-
-        height: 100%;
-
-        margin: 0;
-
-        font-family: Arial, sans-serif;
-
-        background-color: #f4f6f9;
-
-    }
-
-
-
-    .main-content {
-
-        min-height: 100vh;
-
-        display: flex;
-
-        justify-content: center;
-
-        align-items: center;
-
-    }
-
-
-
-
-
-    .container {
-
-        width: 90%;
-
-        max-width: 900px;
-
-        background: white;
-
-        padding: 40px;
-
-        border-radius: 12px;
-
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-
-    }
-
-
-
-    h2 {
-
-        text-align: center;
-
-        margin-bottom: 25px;
-
-    }
-
-
-
-
-
-    form {
-
-        display: grid;
-
-        grid-template-columns: 1fr 1fr;
-
-        gap: 20px;
-
-    }
-
-
-
-    label {
-
-        font-weight: bold;
-
-    }
-
-
-
-    input {
-
-        width: 100%;
-
-        padding: 10px;
-
-        border-radius: 6px;
-
-        border: 1px solid #ccc;
-
-    }
-
-
-
-
-
-    button {
-
-        grid-column: span 2;
-
-        padding: 12px;
-
-        font-size: 18px;
-
-        background-color: #007BFF;
-
-        color: white;
-
-        border: none;
-
-        border-radius: 6px;
-
-        cursor: pointer;
-
-    }
-
-
-
-    button:hover {
-
-        background-color: #0056b3;
-
-    }
-
-
-
-    /* Messages */
-
-    .success {
-
-        color: green;
-
-        text-align: center;
-
-        margin-bottom: 15px;
-
-    }
-
-
-
-    .error {
-
-        color: red;
-
-        text-align: center;
-
-        margin-bottom: 15px;
-
-    }
-</style>
-
-
-
-<div class="main-content">
-
-
-
-    <div class="container">
-
-
-
-        <h2>Add Movie Record</h2>
-
-
-
-        <?php
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-
-
-            $title = $_POST['title'];
-
-            $opening = $_POST['opening'];
-
-            $total = $_POST['total_gross'];
-
-            $percent = $_POST['percent_total'];
-
-            $theaters = $_POST['theaters'];
-
-            $average = $_POST['average'];
-
-            $date = $_POST['release_date'];
-
-            $distributor = $_POST['distributor'];
-
-
-
-            $rankQuery = $conn->prepare("SELECT COUNT(*) + 1 AS rank_num FROM movies WHERE opening > ?");
-
-            $rankQuery->bind_param("i", $opening);
-
-            $rankQuery->execute();
-
-            $result = $rankQuery->get_result();
-
-            $row = $result->fetch_assoc();
-
-            $rank = $row['rank_num'];
-
-
-
-            $stmt = $conn->prepare("INSERT INTO movies  
-
-            (rank_num, title, opening, total_gross, percent_total, theaters, average, release_date, distributor) 
-
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-
-
-            $stmt->bind_param(
-                "isiiidiss",
-
-                $rank,
-
-                $title,
-
-                $opening,
-
-                $total,
-
-                $percent,
-
-                $theaters,
-
-                $average,
-
-                $date,
-
-                $distributor
-
-            );
-
-
-
-            if ($stmt->execute()) {
-
-                echo "<p class='success'>✅ Record inserted! Assigned Rank: $rank</p>";
+<!--includes files-->
+<?php include '../includes/ssi-header.php'; ?>
+<?php include '../includes/ssi-conn.php'; ?>
+
+<!--start of main page content-->
+<main class="container">
+
+    <h1>Movies</h1>
+
+    <p>
+        Browse the current movie collection from the database.
+    </p>
+
+    <!--table wrapper for styling + scroll support-->
+    <div class="table-wrapper">
+
+        <!--start movie table-->
+        <table class="movie-table">
+            <thead>
+                <tr>
+                    <th>rank</th>
+                    <th>title</th>
+                    <th>opening</th>
+                    <th>total gross</th>
+                    <th>% opening</th>
+                    <th>theaters</th>
+                    <th>average</th>
+                    <th>release date</th>
+                    <th>distributor</th>
+                </tr>
+            </thead>
+
+            <!--table body where database rows will show up-->
+            <tbody>
+
+            <?php
+            // grab all movies from the database ordered by rank
+            $sql = "SELECT * FROM movies ORDER BY rank_num ASC";
+            $result = mysqli_query($conn, $sql);
+
+            if ($result && mysqli_num_rows($result) > 0) {
+
+                // loop through each movie row
+                while ($row = mysqli_fetch_assoc($result)) {
+
+                    echo "<tr>
+                        <!-- movie rank -->
+                        <td>{$row['rank_num']}</td>
+
+                        <!-- movie title -->
+                        <td>{$row['title']}</td>
+
+                        <!-- opening weekend formatted as money -->
+                        <td>$" . number_format($row['opening']) . "</td>
+
+                        <!-- total gross formatted as money -->
+                        <td>$" . number_format($row['total_gross']) . "</td>
+
+                        <!-- opening percentage -->
+                        <td>{$row['percent_total']}%</td>
+
+                        <!-- number of theaters -->
+                        <td>" . number_format($row['theaters']) . "</td>
+
+                        <!-- average per theater -->
+                        <td>$" . number_format($row['average']) . "</td>
+
+                        <!-- release date -->
+                        <td>{$row['release_date']}</td>
+
+                        <!-- distributor -->
+                        <td>{$row['distributor']}</td>
+                    </tr>";
+                }
 
             } else {
-
-                echo "<p class='error'>❌ Error: " . $stmt->error . "</p>";
-
+                // fallback message if no data exists
+                echo "<tr><td colspan='9'>no records found</td></tr>";
             }
+            ?>
 
-
-
-            $stmt->close();
-
-        }
-
-        ?>
-
-
-
-        <form method="post">
-
-
-
-            <div>
-
-                <label>Title</label>
-
-                <input type="text" name="title" required>
-
-            </div>
-
-
-
-            <div>
-
-                <label>Opening ($)</label>
-
-                <input type="number" name="opening" required>
-
-            </div>
-
-
-
-            <div>
-
-                <label>Total Gross ($)</label>
-
-                <input type="number" name="total_gross" required>
-
-            </div>
-
-
-
-            <div>
-
-                <label>% of Total</label>
-
-                <input type="number" step="0.01" name="percent_total" required>
-
-            </div>
-
-
-
-            <div>
-
-                <label>Theaters</label>
-
-                <input type="number" name="theaters" required>
-
-            </div>
-
-
-
-            <div>
-
-                <label>Average</label>
-
-                <input type="number" name="average" required>
-
-            </div>
-
-
-
-            <div>
-
-                <label>Release Date</label>
-
-                <input type="date" name="release_date" required>
-
-            </div>
-
-
-
-            <div>
-
-                <label>Distributor</label>
-
-                <input type="text" name="distributor" required>
-
-            </div>
-
-
-
-            <button type="submit">Insert Record</button>
-
-
-
-        </form>
-
-
-
+            </tbody>
+        </table>
     </div>
+</main>
 
-
-
-</div>
+<!--include footer-->
+<?php include '../includes/ssi-footer.php'; ?>
