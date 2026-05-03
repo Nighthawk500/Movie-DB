@@ -1,27 +1,16 @@
-<?php
-
-$server = "localhost";
-
+<?php 
+// Database connection parameters
+$servername = "localhost";
+$dbname = "movie_db";
 $username = "root";
+$password = "mysql";
+$charset = "utf8mb4";
 
-$password = "";
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-$database = "movie_db";
-
-
-
-// Connect  
-
-$conn = mysqli_connect($server, $username, $password, $database);
-
-
-
-// Check errors  
-
-if (!$conn) {
-
-    die("Connection failed.");
-
+// check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
 ?>
