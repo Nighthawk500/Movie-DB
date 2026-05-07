@@ -1,5 +1,5 @@
-<?php include("includes/Ssi-header.php"); ?>
-<?php include("includes/Ssi-conn.php"); ?>
+<?php include("../includes/ssi-header.php"); ?>
+<?php include("../includes/ssi-conn.php"); ?>
 
 
 <div class="container" style="margin-top:100px;">
@@ -25,4 +25,4 @@
     ?>
 </div>
 
-<?php include("includes/Ssi-footer.php"); ?>
+<?php include("../includes/ssi-footer.php"); ?>

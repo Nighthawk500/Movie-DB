@@ -1,9 +1,9 @@
-<?php 
+<?php
 // Database connection parameters
 $servername = "localhost";
 $dbname = "movie_db";
 $username = "root";
-$password = "mysql";
+$password = "";
 $charset = "utf8mb4";
 
 $conn = new mysqli($servername, $username, $password, $dbname);

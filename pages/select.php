@@ -1,26 +1,14 @@
-<?php include("Ssi-header.php"); ?>
+<?php include("../includes/ssi-header.php"); ?>
 
 
 
-<?php include("Ssi-conn.php"); ?>
+<?php include("../includes/ssi-conn.php"); ?>
 
 
 
 
 
 <?php
-
-$conn = new mysqli("localhost", "root", "mysql", "movies");
-
-
-
-if ($conn->connect_error) {
-
-    die("Connection failed: " . $conn->connect_error);
-
-}
-
-
 
 $sql = "SELECT * FROM movies ORDER BY rank_num ASC";
 
@@ -117,7 +105,7 @@ $result = $conn->query($sql);
 
             <td>{$row['total_gross']}</td> 
 
-            <td>{$row['opening_percent']}%</td> 
+            <td>{$row['percent_total']}%</td> 
 
             <td>{$row['theaters']}</td> 
 
@@ -153,4 +141,4 @@ $result = $conn->query($sql);
 
 
 
-<?php include("includes/Ssi-footer.php"); ?>
+<?php include("../includes/ssi-footer.php"); ?>

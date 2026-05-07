@@ -1,6 +1,6 @@
-<?php include("includes/Ssi-header.php"); ?>
+<?php include("../includes/ssi-header.php"); ?>
 
-<?php include("includes/Ssi-conn.php"); ?>
+<?php include("../includes/ssi-conn.php"); ?>
 
 
 
@@ -78,7 +78,7 @@
 
 
 
-            while ($row = mysquil_fetch_accos($result)) {
+            while ($row = mysqli_fetch_assoc($result)) {
 
                 echo "<option value='" . $row['id'] . "'>" . $row['title'] . "</option>";
 
@@ -158,15 +158,15 @@
 
 
 
-                $result = mysqil_query($conn, "SELECT * FROM movies");
+                $result = mysqli_query($conn, "SELECT * FROM movies");
 
 
 
-                if (mysqil_num_rows($result) > 0) {
+                if (mysqli_num_rows($result) > 0) {
 
 
 
-                    while ($row = mysqil_fetch_assoc($result)) {
+                    while ($row = mysqli_fetch_assoc($result)) {
 
                         echo "<tr> 
 
@@ -224,4 +224,4 @@
 
 
 
-<?php include("includes/Ssi-footer.php"); ?>
+<?php include("../includes/ssi-footer.php"); ?>
