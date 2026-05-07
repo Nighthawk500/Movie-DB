@@ -3,85 +3,21 @@
 <?php include '../includes/ssi-conn.php'; ?>
 
 <!--start of main page content-->
-<main class="container">
+<main>
 
-    <h1>Movies</h1>
+    <div class="container" style="padding: 20px;">
 
-    <p>
-        Browse the current movie collection from the database.
-    </p>
+        <h1>Movie Mayhem</h1>
 
-    <!--table wrapper for styling + scroll support-->
-    <div class="table-wrapper">
-
-        <!--start movie table-->
-        <table class="movie-table">
-            <thead>
-                <tr>
-                    <th>rank</th>
-                    <th>title</th>
-                    <th>opening</th>
-                    <th>total gross</th>
-                    <th>% opening</th>
-                    <th>theaters</th>
-                    <th>average</th>
-                    <th>release date</th>
-                    <th>distributor</th>
-                </tr>
-            </thead>
-
-            <!--table body where database rows will show up-->
-            <tbody>
-
-            <?php
-            // grab all movies from the database ordered by rank
-            $sql = "SELECT * FROM movies ORDER BY rank_num ASC";
-            $result = mysqli_query($conn, $sql);
-
-            if ($result && mysqli_num_rows($result) > 0) {
-
-                // loop through each movie row
-                while ($row = mysqli_fetch_assoc($result)) {
-
-                    echo "<tr>
-                        <!-- movie rank -->
-                        <td>{$row['rank_num']}</td>
-
-                        <!-- movie title -->
-                        <td>{$row['title']}</td>
-
-                        <!-- opening weekend formatted as money -->
-                        <td>$" . number_format($row['opening']) . "</td>
-
-                        <!-- total gross formatted as money -->
-                        <td>$" . number_format($row['total_gross']) . "</td>
-
-                        <!-- opening percentage -->
-                        <td>{$row['percent_total']}%</td>
-
-                        <!-- number of theaters -->
-                        <td>" . number_format($row['theaters']) . "</td>
-
-                        <!-- average per theater -->
-                        <td>$" . number_format($row['average']) . "</td>
-
-                        <!-- release date -->
-                        <td>{$row['release_date']}</td>
-
-                        <!-- distributor -->
-                        <td>{$row['distributor']}</td>
-                    </tr>";
-                }
-
-            } else {
-                // fallback message if no data exists
-                echo "<tr><td colspan='9'>no records found</td></tr>";
-            }
-            ?>
-
-            </tbody>
-        </table>
+<p>Movie Mayhem is a group project built for ISYS 288 using PHP and MySQL. We pulled together a 
+  real box office dataset and built a fully working web app around it — complete with search, insert, 
+  update, and delete functionality. One of our biggest challenges was getting the database connection 
+  and CSV import working correctly across everyone's local machines, but once the data was flowing it 
+  all started to come together. We really enjoyed seeing the pieces connect — writing a query, 
+  watching it hit the database, and having the results show up on the page. It gave us a solid 
+  understanding of how real database-driven websites actually work under the hood.</p>
     </div>
+
 </main>
 
 <!--include footer-->
