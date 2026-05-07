@@ -13,22 +13,47 @@ Authors:
 -->
 
     <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Movie Mayhem</title>
-            <link rel="stylesheet" href="../css/styles.css">
-        </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Mayhem</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+ 
+<body>
+    <nav class="navbar">
+    <header class="site-header">
         
-        <body>
-            <header class="site-header">
-                <div class="logo">
-                    Movie Mayhem
-                </div>
+        <div class="logo">
+            Movie Mayhem
+        </div>
+ 
+        
+            <a href="index.php">Home</a>
+            <a href="setup-database.php">Create Movie Database</a>
 
-                <!-- Navigation Menu -->
-                <nav class="navbar">
-                    <a href="index.php">Home</a>
-                    <a href="movies.php">Page 2</a>
-                    <a href="search.php">More</a>
-                </nav>
-            </header>
+            <li class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Crud operations
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../pages/select.php">Select from database</a></li>
+                            <li><a class="dropdown-item" href="../pages/insert.php">Insert data</a></li>
+                            <li><a class="dropdown-item" href="../pages/update.php">Update selections</a></li>
+                            <li><a class="dropdown-item" href="../pages/delete.php">Delete from database</a></li>
+                        </ul>
+            </li>
+            
+            <li class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            More
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../pages/database.php">Database</a></li>
+                        </ul>
+            </li>
+
+</header>
+</nav>
+                            
+        
+
