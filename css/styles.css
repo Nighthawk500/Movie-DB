@@ -1,20 +1,23 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #0d0d0d;
+    background-color: #000000;
     color: #f5f5f5;
     font-size: 18px;
     font-family: 'Trebuchet MS', sans-serif;
 }
 
-/* Start Header */
+/* -------------------------------------------------- */
+/* HEADER */
+/* -------------------------------------------------- */
 .site-header {
     background: #111;
     border-bottom: 3px solid #b30000;
     padding: 15px 30px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* left-aligns all items */
     align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .logo {
@@ -22,26 +25,104 @@ body {
     font-weight: bold;
     color: #ffd700;
     padding: 20px;
+    margin-right: 20px; /* separates logo from nav links */
+}
+/* End Header styles */
+
+
+/* -------------------------------------------------- */
+/* NAVBAR LINKS */
+/* -------------------------------------------------- */
+.navbar {
+    background: #111;
+    margin: 0;
 }
 
-/* End Header */
-
-/* Start Nav Styling */
 .navbar a {
     color: #f5f5f5;
     text-decoration: none;
-    margin-left: 20px;
     font-weight: bold;
-    padding: 15px;
+    padding: 15px 10px;
+    display: inline-block;
 }
 
 .navbar a:hover {
     color: #ffd700;
 }
+/* End Navbar styles */
 
-/* End Styling */
 
-/* start MAIN */
+/* -------------------------------------------------- */
+/* DROPDOWN */
+/* -------------------------------------------------- */
+.nav-item {
+    list-style: none;
+    position: relative;
+    display: inline-block;
+}
+
+.nav-link {
+    color: #f5f5f5;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 15px 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    color: #ffd700;
+}
+
+
+.dropdown-toggle::after {
+    content: ' ▾';
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #1a1a1a;
+    border: 1px solid #b30000;
+    border-radius: 5px;
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+    min-width: 200px;
+    z-index: 1000;
+}
+
+.dropdown-menu li {
+    list-style: none;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 10px 16px;
+    color: #f5f5f5;
+    text-decoration: none;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.dropdown-item:hover {
+    background: transparent;
+    color: #ffd700;
+}
+
+/* open on hover */
+.nav-item:hover .dropdown-menu {
+    display: block;
+}
+/* End Dropdown styles */
+
+/* -------------------------------------------------- */
+/* MAIN */
+/* -------------------------------------------------- */
 .container {
     max-width: 1200px;
     margin: auto;
@@ -60,10 +141,81 @@ p {
     margin-bottom: 40px;
     font-size: 23px;
 }
+/* End Main styling
 
-/* Start Table styling */
+/* -------------------------------------------------- */
+/* SEARCH FORM */
+/* -------------------------------------------------- */
+.search-container {
+    margin-bottom: 30px;
+    text-align: center;
+}
+ 
+.search-container form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+ 
+.search-input {
+    padding: 10px 15px;
+    font-size: 16px;
+    width: 300px;
+    border: 2px solid #b30000;
+    border-radius: 5px;
+    background: #1a1a1a;
+    color: #f5f5f5;
+}
+
+.search-input::placeholder {
+    color: #777;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 5px #ffd700;
+}
+.search-button {
+    padding: 10px 20px;
+    background: #b30000;
+    color: #ffd700;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+.search-button:hover {
+    background: #8b0000;
+}
+.clear-button {
+    Padding: 10px 20px;
+    background: #333;
+    color: #f5f5f5;
+    border: 2px solid #666;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.clear-button:hover {
+    background: #555;
+    border-color: #ffd700;
+}
+/* End Search Form styling */
+
+/* -------------------------------------------------- */
+/* TABLES */
+/* -------------------------------------------------- */
 .table-wrapper {
     margin-top: 30px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: auto;
 }
 
 .movie-table {
@@ -80,7 +232,7 @@ p {
     color: #ffd700;
     padding: 12px;
     text-transform: uppercase;
-    font-size: 20px;
+    font-size: 16px;
     border-bottom: 2px solid #b30000;
 }
 
@@ -95,8 +247,42 @@ p {
 }
 /* End Table styling */
 
+/* -------------------------------------------------- */
+/* LINKS */
+/* -------------------------------------------------- */
+.link {
+  color: #185FA5;
+  text-decoration: underline;
+}
+.link:hover {
+  color: #0C447C;
+}
 
-/* start FOOTER */  
+.link-a {
+  color: #888;
+  text-decoration: none;
+  font-size: 14px;
+}
+.link-a:hover {
+  color: #222;
+  text-decoration: underline;
+}
+
+.link-b {
+  color: #888;
+  text-decoration: none;
+  font-size: 14px;
+}
+.link-b:hover {
+  color: #222;
+  text-decoration: underline;
+}
+/* End Link styles */
+
+
+/* -------------------------------------------------- */
+/* FOOTER */
+/* -------------------------------------------------- */ 
 .site-footer {  
     margin-top: 50px; 
     padding: 20px; 
@@ -105,4 +291,43 @@ p {
     border-top: 2px solid #b30000; 
     color: #777; 
 }
-/* end FOOTER */
+
+.footer-inner {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffd700; /* matches header logo */
+}
+
+.footer-nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-nav a {
+    color: #f5f5f5;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 6px 10px;
+}
+
+.footer-nav a:hover {
+    color: #ffd700; /* matches header hover */
+}
+
+.footer-copy {
+    color: #777;
+    font-size: 14px;
+    margin: 0;
+}
+/* End Footer styles */
