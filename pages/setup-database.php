@@ -6,7 +6,7 @@
 // MySQL server information
 $servername = "localhost";
 $username = "root";
-$password = ""; // Use "" or "mysql" depending on your AMPPS MySQL password
+$password = "mysql"; // Use "" or "mysql" depending on your AMPPS MySQL password
 
 // Create a connection to the MySQL server.
 // At this point, we are not connecting to a specific database yet.
@@ -18,13 +18,12 @@ if ($conn->connect_error) {
 }
 
 // SQL command to create the database if it does not already exist.
-$sql = "CREATE DATABASE IF NOT EXISTS movie_db";
-
-// Run the database creation query.
-if ($conn->query($sql) === TRUE) {
+try {
+    // Run the database query to create movie_db
+    $conn->query("CREATE DATABASE IF NOT EXISTS movie_db");
     echo "Database movie_db created successfully or already exists.<br>";
-} else {
-    die("Error creating database: " . $conn->error);
+} catch (mysqli_sql_exception $e) {
+    die("Error creating database: " . $e->getMessage());
 }
 
 // Select the movie_db database so the table can be created inside it.
@@ -56,6 +55,8 @@ if ($conn->query($sql) === TRUE) {
 $conn->close();
 
 // Final confirmation message.
-echo "Database setup complete.";
-
+echo "Database setup complete." . " " . "<a href='../pages/import-csv.php' class='link-a'>Populate database</a>";
 ?>
+
+
+
